@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class ManualDrive {
-    DcMotor leftFrontMotor_0;
+    public DcMotor leftFrontMotor_0;
     public DcMotor leftBackMotor_1;
     public DcMotor rightBackMotor_2;
     public DcMotor rightFrontMotor_3;
@@ -36,4 +36,31 @@ public class ManualDrive {
         rightFrontMotor_3.setPower(rightFrontPower);
     }
 
+    public void controllerDrive(double axial, double lateral, double yaw) {
+        // Function takes in desired directions as parameters.
+
+        double leftFrontPower = axial + lateral + yaw;
+        double leftBackPower = axial + lateral - yaw;
+        double rightFrontPower = axial - lateral - yaw;
+        double rightBackPower = axial - lateral + yaw;
+        // Calculates necessary motor speeds.
+        // These calculations are dependent on this orientation:      \ /
+        // Look up a mecanum diagram to see how this works.           / \
+
+        double max = Math.max(Math.abs(leftFrontPower), Math.abs(rightFrontPower));
+        max = Math.max(max, Math.abs(rightBackPower));
+        max = Math.max(max, Math.abs(leftBackPower));
+        // Finds max value.
+
+
+        if (max > 1.0) {
+            leftFrontPower /= max;
+            rightFrontPower /= max;
+            rightBackPower /= max;
+            leftBackPower /= max;
+        }
+        // Readjusts for max value to preserve the intention of the controller.
+
+        setDCMotorPower(leftFrontPower, rightBackPower, rightFrontPower, leftBackPower);
+    }
 }
