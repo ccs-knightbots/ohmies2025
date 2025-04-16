@@ -43,8 +43,12 @@ public class XBot extends OpMode{
 
 //      This function sends the game pad inputs to the Traction class.
         XCore.manualDrive.controllerDrive(axial * slowDown, lateral * slowDown, yaw * slowDown);
-
-
+        if (structures.toggle_2(gamepad1.x)) {
+            XCore.finger.openFinger();
+        }
+        else {
+            XCore.finger.closeFinger();
+        }
 
     }
 }

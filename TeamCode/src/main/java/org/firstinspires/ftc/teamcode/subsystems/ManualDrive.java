@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class ManualDrive {
@@ -22,7 +23,7 @@ public class ManualDrive {
         fl3.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         // Sets the mode. *See official FTC guide for more options.
 
-        fr0.setDirection(DcMotor.Direction.FORWARD);
+        fr0.setDirection(DcMotor.Direction.REVERSE);
         br1.setDirection(DcMotor.Direction.REVERSE);
         bl2.setDirection(DcMotor.Direction.FORWARD);
         fl3.setDirection(DcMotor.Direction.REVERSE);
@@ -30,19 +31,19 @@ public class ManualDrive {
     }
 
     public void setDCMotorPower(double leftFrontPower, double leftBackPower, double rightFrontPower, double rightBackPower) {
-        fr0.setPower(leftFrontPower);
-        br1.setPower(leftBackPower);
-        bl2.setPower(rightBackPower);
-        fl3.setPower(rightFrontPower);
+        fr0.setPower(rightFrontPower);
+        br1.setPower(rightBackPower);
+        bl2.setPower(leftBackPower);
+        fl3.setPower(leftFrontPower);
     }
 
     public void controllerDrive(double axial, double lateral, double yaw) {
         // Function takes in desired directions as parameters.
 
-        double leftFrontPower = axial + lateral + yaw;
-        double leftBackPower = axial - lateral + yaw;
-        double rightFrontPower = axial - lateral - yaw;
-        double rightBackPower = axial + lateral - yaw;
+        double leftFrontPower = axial + yaw + lateral;
+        double leftBackPower = axial - yaw + lateral;
+        double rightFrontPower = axial - yaw - lateral;
+        double rightBackPower = axial + yaw - lateral;
         // Calculates necessary motor speeds.
         // These calculations are dependent on this orientation:      \ /
         // Look up a mecanum diagram to see how this works.           / \

@@ -7,8 +7,10 @@ import org.firstinspires.ftc.teamcode.subsystems.*;
 public class XCore {
 
     public ManualDrive manualDrive;
+    public Finger finger;
 
     public XCore(HardwareMap hwMap) {
         manualDrive = new ManualDrive(hwMap);
+        finger = new Finger(hwMap);
     }
 }
