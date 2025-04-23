@@ -15,6 +15,7 @@ public class XBot extends OpMode{
     boolean alreadyPressed;
     boolean finalStage;
 
+
     @Override
     public void init() {
         XCore = new XCore(hardwareMap);
@@ -49,6 +50,7 @@ public class XBot extends OpMode{
         else {
             XCore.finger.closeFinger();
         }
+        telemetry.addData("fingerRotation: ", XCore.finger.getFingerRotation());
 
     }
 }
