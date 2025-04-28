@@ -8,9 +8,11 @@ public class XCore {
 
     public ManualDrive manualDrive;
     public Finger finger;
+    public Wrist wrist;
 
     public XCore(HardwareMap hwMap) {
         manualDrive = new ManualDrive(hwMap);
         finger = new Finger(hwMap);
+        wrist = new Wrist(hwMap);
     }
 }

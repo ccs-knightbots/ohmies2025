@@ -51,6 +51,11 @@ public class XBot extends OpMode{
             XCore.finger.closeFinger();
         }
         telemetry.addData("fingerRotation: ", XCore.finger.getFingerRotation());
+        telemetry.addData("Wrist Rotation: ", XCore.wrist.getWristRotation());
+
+        XCore.wrist.setWristServo((-gamepad2.left_stick_y + 1) / 4);
+
+
 
     }
 }

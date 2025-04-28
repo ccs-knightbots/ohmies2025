@@ -14,7 +14,7 @@ public class Finger {
     }
 
     public void openFinger() {
-        fingerServo.setPosition(.9);
+        fingerServo.setPosition(1);
     }
 
     public void raiseFinger(){ fingerServo.setPosition(.6);}
