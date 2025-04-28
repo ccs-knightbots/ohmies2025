@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.teleops;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.teamcode.statemachines.SlidesSM;
 import org.firstinspires.ftc.teamcode.utilities.*;
 //import org.firstinspires.ftc.teamcode.statemachines.SlidesSM;
 
@@ -14,12 +15,14 @@ public class XBot extends OpMode{
     double slowDown = .5;
     boolean alreadyPressed;
     boolean finalStage;
+    double slidesIn, slidesOut;
 
 
     @Override
     public void init() {
         XCore = new XCore(hardwareMap);
         structures = new Structures();
+        XCore.slides.slidesSM.transition(SlidesSM.EVENT.ENABLE_MANUAL);
 
     }
 
@@ -44,25 +47,40 @@ public class XBot extends OpMode{
 
 //      This function sends the game pad inputs to the Traction class.
         XCore.manualDrive.controllerDrive(axial * slowDown, lateral * slowDown, yaw * slowDown);
-        if (structures.toggle_2(gamepad1.x)) {
+        if (structures.toggle_2(gamepad2.x)) {
             XCore.finger.openFinger();
         }
         else {
             XCore.finger.closeFinger();
         }
 
-        if (structures.toggle_3(gamepad1.y)) {
+        if (structures.toggle_3(gamepad2.y)) {
             XCore.cup.raiseCup();
         }
         else {
             XCore.cup.lowerCup();
         }
+//        XCore.cup.setCupServo((-gamepad2.left_stick_x + 1) / 4);
+//        XCore.finger.setFingerServo((-gamepad2.right_stick_x + 1) / 4);
+//        XCore.slides.setTargetPosition(gamepad2.);
+
+
+
         telemetry.addData("fingerRotation: ", XCore.finger.getFingerRotation());
         telemetry.addData("wristRotation: ", XCore.wrist.getWristRotation());
         telemetry.addData("cupRotation: ", XCore.cup.getCupRotation());
+        telemetry.addData("slides pos: ", XCore.slides.getTargetPosition());
+        telemetry.addData("slides mode: ", XCore.slides.slidesSM.getState());
 
 
         XCore.wrist.setWristServo((-gamepad2.left_stick_y + 1) / 4);
+
+        if (XCore.slides.getTargetPosition() > -35) {
+            slidesIn = 0;
+        } else {
+            slidesIn = gamepad2.right_trigger;
+        }
+        XCore.slides.setManualPower(slidesIn-slidesOut);
 
 
 
