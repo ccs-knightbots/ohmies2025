@@ -50,8 +50,17 @@ public class XBot extends OpMode{
         else {
             XCore.finger.closeFinger();
         }
+
+        if (structures.toggle_3(gamepad1.y)) {
+            XCore.cup.raiseCup();
+        }
+        else {
+            XCore.cup.lowerCup();
+        }
         telemetry.addData("fingerRotation: ", XCore.finger.getFingerRotation());
-        telemetry.addData("Wrist Rotation: ", XCore.wrist.getWristRotation());
+        telemetry.addData("wristRotation: ", XCore.wrist.getWristRotation());
+        telemetry.addData("cupRotation: ", XCore.cup.getCupRotation());
+
 
         XCore.wrist.setWristServo((-gamepad2.left_stick_y + 1) / 4);
 
