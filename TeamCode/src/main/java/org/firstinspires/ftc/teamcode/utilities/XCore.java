@@ -11,6 +11,7 @@ public class XCore {
     public Wrist wrist;
     public Slides slides;
     public Cup cup;
+    public Tongue tongue;
 
     public XCore(HardwareMap hwMap) {
         manualDrive = new ManualDrive(hwMap);
@@ -18,5 +19,6 @@ public class XCore {
         wrist = new Wrist(hwMap);
         slides = new Slides(hwMap);
         cup = new Cup(hwMap);
+        tongue = new Tongue(hwMap);
     }
 }

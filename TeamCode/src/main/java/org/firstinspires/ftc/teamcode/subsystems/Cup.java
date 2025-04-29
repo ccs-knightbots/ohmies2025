@@ -10,11 +10,11 @@ public class Cup {
     }
 
     public void raiseCup() {
-        cupServo.setPosition(0);
+        cupServo.setPosition(.2);
     }
 
     public void lowerCup() {
-        cupServo.setPosition(1);
+        cupServo.setPosition(.85);
     }
 
     public void setCupServo(double cupAngle) {cupServo.setPosition(cupAngle);}

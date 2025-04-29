@@ -29,7 +29,7 @@ public class XBot extends OpMode{
     @Override
     public void loop() {
         if (structures.toggle_1(gamepad1.a)) {
-            axial = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
+            axial = gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
             lateral = gamepad1.left_stick_x;
         } else {
             axial = gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
@@ -46,20 +46,15 @@ public class XBot extends OpMode{
         }
 
 //      This function sends the game pad inputs to the Traction class.
-        /*XCore.manualDrive.controllerDrive(axial * slowDown, lateral * slowDown, yaw * slowDown);
+        XCore.manualDrive.controllerDrive(axial * slowDown, lateral * slowDown, yaw * slowDown);
         if (structures.toggle_2(gamepad2.x)) {
             XCore.finger.openFinger();
         }
         else {
             XCore.finger.closeFinger();
-        }*/
+        }
 
-        if (structures.toggle_3(gamepad2.y)) {
-            XCore.cup.raiseCup();
-        }
-        else {
-            XCore.cup.lowerCup();
-        }
+
 //        XCore.cup.setCupServo((-gamepad2.left_stick_x + 1) / 4);
 //        XCore.finger.setFingerServo((-gamepad2.right_stick_x + 1) / 4);
 //        XCore.slides.setTargetPosition(gamepad2.);
@@ -71,11 +66,27 @@ public class XBot extends OpMode{
         telemetry.addData("cupRotation: ", XCore.cup.getCupRotation());
         telemetry.addData("slides pos: ", XCore.slides.getTargetPosition());
         telemetry.addData("slides mode: ", XCore.slides.slidesSM.getState());
+        telemetry.addData("Tongue pos: ", XCore.tongue.getTargetPosition());
+        telemetry.addData("Tongue mode: ", XCore.tongue.tongueSM.getState());
 
 
         XCore.wrist.setWristServo(gamepad2.left_stick_y);
 
-        XCore.finger.setFingerServo(gamepad2.left_stick_x);
+        if (structures.toggle_3(gamepad2.y)) {
+            XCore.cup.raiseCup();
+        }
+        else {
+            XCore.cup.lowerCup();
+        }
+
+
+            XCore.wrist.setWristServo(-gamepad2.left_stick_y);
+
+
+
+
+        //XCore.cup.setCupServo(gamepad2.left_stick_x);
+
 
         if (XCore.slides.getTargetPosition() > -35) {
             slidesIn = 0;
