@@ -32,8 +32,8 @@ public class XBot extends OpMode{
             axial = gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
             lateral = gamepad1.left_stick_x;
         } else {
-            axial = gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
-            lateral = -gamepad1.left_stick_x;
+            axial = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
+            lateral = gamepad1.left_stick_x;
         }
 //      Rotation doesn't change even if you invert it.
         yaw = gamepad1.right_stick_x;
