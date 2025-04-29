@@ -60,9 +60,15 @@ public class XBot extends OpMode{
         telemetry.addData("fingerRotation: ", XCore.finger.getFingerRotation());
         telemetry.addData("wristRotation: ", XCore.wrist.getWristRotation());
         telemetry.addData("cupRotation: ", XCore.cup.getCupRotation());
+        telemetry.addData("Linear Extender: ", XCore.slides.getLinearExtender1());
+        telemetry.addData("Linear Extender: ", XCore.slides.getLinearExtender2());
+
 
 
         XCore.wrist.setWristServo((-gamepad2.left_stick_y + 1) / 4);
+
+        telemetry.update();
+        telemetry.addData("State: ", XCore.slides.slidesSM.getState());
 
 
 
