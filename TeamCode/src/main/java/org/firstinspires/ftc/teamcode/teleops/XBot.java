@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.statemachines.SlidesSM;
 import org.firstinspires.ftc.teamcode.utilities.*;
-//import org.firstinspires.ftc.teamcode.statemachines.SlidesSM;
+
 
 @TeleOp
 public class XBot extends OpMode{
@@ -29,11 +29,11 @@ public class XBot extends OpMode{
     @Override
     public void loop() {
         if (structures.toggle_1(gamepad1.a)) {
-            axial = gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
-            lateral = -gamepad1.left_stick_x;
-        } else {
             axial = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
             lateral = gamepad1.left_stick_x;
+        } else {
+            axial = gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
+            lateral = -gamepad1.left_stick_x;
         }
 //      Rotation doesn't change even if you invert it.
         yaw = gamepad1.right_stick_x;
@@ -46,13 +46,13 @@ public class XBot extends OpMode{
         }
 
 //      This function sends the game pad inputs to the Traction class.
-        XCore.manualDrive.controllerDrive(axial * slowDown, lateral * slowDown, yaw * slowDown);
+        /*XCore.manualDrive.controllerDrive(axial * slowDown, lateral * slowDown, yaw * slowDown);
         if (structures.toggle_2(gamepad2.x)) {
             XCore.finger.openFinger();
         }
         else {
             XCore.finger.closeFinger();
-        }
+        }*/
 
         if (structures.toggle_3(gamepad2.y)) {
             XCore.cup.raiseCup();
@@ -73,7 +73,9 @@ public class XBot extends OpMode{
         telemetry.addData("slides mode: ", XCore.slides.slidesSM.getState());
 
 
-        XCore.wrist.setWristServo((-gamepad2.left_stick_y + 1) / 4);
+        XCore.wrist.setWristServo(gamepad2.left_stick_y);
+
+        XCore.finger.setFingerServo(gamepad2.left_stick_x);
 
         if (XCore.slides.getTargetPosition() > -35) {
             slidesIn = 0;
