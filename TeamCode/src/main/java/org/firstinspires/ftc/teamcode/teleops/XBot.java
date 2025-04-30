@@ -13,6 +13,7 @@ public class XBot extends OpMode{
     Structures structures;
     double axial, lateral, yaw;
     double slowDown = .5;
+    double tongueOut, tongueIn;
     boolean alreadyPressed;
     boolean finalStage;
     double slidesIn, slidesOut;
@@ -44,6 +45,20 @@ public class XBot extends OpMode{
         } else if (gamepad1.left_stick_button) {
             slowDown = 1;
         }
+
+        if (XCore.tongue.getPosition() < -1000) {
+            tongueOut = 0;
+        } else {
+            tongueOut = gamepad2.left_trigger;
+        }
+
+        if (XCore.tongue.getPosition() > -35) {
+            tongueIn = 0;
+        } else {
+            tongueIn = gamepad2.right_trigger;
+        }
+        XCore.tongue.setManualPower(tongueIn-tongueOut);
+
 
 //      This function sends the game pad inputs to the Traction class.
         XCore.manualDrive.controllerDrive(axial * slowDown, lateral * slowDown, yaw * slowDown);
