@@ -40,10 +40,10 @@ public class ManualDrive {
     public void controllerDrive(double axial, double lateral, double yaw) {
         // Function takes in desired directions as parameters.
 
-        double leftFrontPower = axial + yaw + lateral;
-        double leftBackPower = axial - yaw + lateral;
-        double rightFrontPower = axial - yaw - lateral;
-        double rightBackPower = axial + yaw - lateral;
+        double leftFrontPower = axial - yaw - lateral;
+        double leftBackPower = axial + yaw - lateral;
+        double rightFrontPower = axial + yaw + lateral;
+        double rightBackPower = axial - yaw + lateral;
         // Calculates necessary motor speeds.
         // These calculations are dependent on this orientation:      \ /
         // Look up a mecanum diagram to see how this works.           / \

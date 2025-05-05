@@ -23,8 +23,8 @@ public class Slides {
         linearExtender1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         linearExtender2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        linearExtender1.setDirection(DcMotor.Direction.FORWARD);
-        linearExtender2.setDirection(DcMotor.Direction.REVERSE);
+        linearExtender1.setDirection(DcMotor.Direction.REVERSE);
+        linearExtender2.setDirection(DcMotor.Direction.FORWARD);
 
         linearExtender1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         linearExtender2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -78,6 +78,6 @@ public class Slides {
     }
 
     public double getLinearExtenderPos1() {return linearExtender1.getCurrentPosition()/(.5*tickPerRotation);}
-    public double getLinearExtender2() {return linearExtender2.getCurrentPosition()/(.5*tickPerRotation);}
+    public double getLinearExtenderPos2() {return linearExtender2.getCurrentPosition()/(.5*tickPerRotation);}
 //    For some reason, the FTC ticksPerRotation is 2x what it should be.
 }

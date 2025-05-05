@@ -3,6 +3,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.statemachines.SlidesSM;
+import org.firstinspires.ftc.teamcode.statemachines.TongueSM;
 import org.firstinspires.ftc.teamcode.utilities.*;
 
 
@@ -15,6 +16,7 @@ public class XBot extends OpMode{
     double slowDown = .5;
     double tongueOut, tongueIn;
     boolean alreadyPressed;
+    boolean alreadyDown;
     boolean finalStage;
     double slidesIn, slidesOut;
 
@@ -26,6 +28,14 @@ public class XBot extends OpMode{
         XCore.slides.slidesSM.transition(SlidesSM.EVENT.ENABLE_MANUAL);
 
     }
+
+    @Override
+    public void start() {
+        XCore.slides.slidesSM.transition(SlidesSM.EVENT.ENABLE_RTP);
+        XCore.tongue.tongueSM.transition(TongueSM.EVENT.ENABLE_MANUAL);
+    }
+
+
 
     @Override
     public void loop() {
@@ -109,6 +119,27 @@ public class XBot extends OpMode{
             slidesIn = gamepad2.right_trigger;
         }
         XCore.slides.setManualPower(slidesIn-slidesOut);
+
+        if (gamepad1.dpad_up) {
+            XCore.slides.goUp(.5449);
+//            Full run is 2.15
+        } else if (gamepad1.dpad_down) {
+            XCore.slides.goDown();
+        }
+
+
+
+        /*boolean approximatelyDown = Math.abs(XCore.slides.getLinearExtenderPos1()) <= .1;
+        if (approximatelyDown && !alreadyDown) {
+            if (finalStage) {
+                XCore.slides.goDown();
+            } else {
+                XCore.slides.cancelRunTo();
+            }
+        }
+        alreadyDown = approximatelyDown;
+
+         */
 
 
 
