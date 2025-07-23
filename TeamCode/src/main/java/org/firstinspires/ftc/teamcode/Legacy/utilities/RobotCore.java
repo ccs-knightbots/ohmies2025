@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.Legacy.utilities;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.teamcode.Legacy.subsystems.Claw;
+import org.firstinspires.ftc.teamcode.Legacy.subsystems.Vision;
 import org.firstinspires.ftc.teamcode.subsystems.ManualDrive;
 import org.firstinspires.ftc.teamcode.subsystems.Slides;
 import org.firstinspires.ftc.teamcode.subsystems.Wrist;

@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.Legacy.auto_ops;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-import org.firstinspires.ftc.teamcode.utilities.RobotCore;
+import org.firstinspires.ftc.teamcode.Legacy.utilities.RobotCore;
 
 @Autonomous
 public class UniversalAuto extends OpMode {
