@@ -19,7 +19,7 @@ public class Finger {
 
     public void raiseFinger(){ fingerServo.setPosition(.6);}
 
-    public void setFingerServo(double gripperAngle) {fingerServo.setPosition(gripperAngle);}
+    public void setFingerServo(double fingerAngle) {fingerServo.setPosition(fingerAngle);}
 
     public double getFingerRotation() {return fingerServo.getPosition();}
     //does not return actual finger rotation, just target value
