@@ -10,7 +10,7 @@ public class CrashProtect {
     public double distance = distanceSensor.getDistance(DistanceUnit.CM);
 
     public CrashProtect(HardwareMap hwmap) {
-        distanceSensor = hwmap.get(DistanceSensor.class, "distanceSensor1");
+        distanceSensor = hwmap.get(DistanceSensor.class, "distanceSensor");
     }
 
 }
