@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.Legacy.subsystems;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+//import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+//import com.qualcomm.robotcore.hardware.DistanceSensor;
 
 public class ManualDrive {
     public DcMotor leftFrontMotor_0;
@@ -9,11 +11,18 @@ public class ManualDrive {
     public DcMotor rightBackMotor_2;
     public DcMotor rightFrontMotor_3;
 
+    //public DistanceSensor distanceSensor;
+
+    //public double distance = distanceSensor.getDistance(DistanceUnit.CM);
+
+
     public ManualDrive(HardwareMap hwMap) {
             leftFrontMotor_0 = hwMap.get(DcMotor.class, "leftFrontMotor_0");
             leftBackMotor_1 = hwMap.get(DcMotor.class, "leftBackMotor_1");
             rightBackMotor_2 = hwMap.get(DcMotor.class, "rightBackMotor_2");
             rightFrontMotor_3 = hwMap.get(DcMotor.class, "rightFrontMotor_3");
+
+            //distanceSensor = hwMap.get(DistanceSensor.class, "distanceSensor1");
             // Maps motors.
 
             leftFrontMotor_0.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -29,7 +38,7 @@ public class ManualDrive {
             // Sets the direction. You might have to change this if hardware team screws up. `-`
     }
 
-    public void setDCMotorPower(double leftFrontPower, double leftBackPower, double rightFrontPower, double rightBackPower){
+    public void setDCMotorPower(double leftFrontPower, double leftBackPower, double rightFrontPower, double rightBackPower) {
         leftFrontMotor_0.setPower(leftFrontPower);
         leftBackMotor_1.setPower(leftBackPower);
         rightBackMotor_2.setPower(rightBackPower);
@@ -61,7 +70,8 @@ public class ManualDrive {
             rightBackPower   /= max;
             leftBackPower  /= max;
         }
-        // Readjusts for max value to preserve the intention of the controller.
+        // Readjusts for max value to preserve the intention of the controller
+
 
         setDCMotorPower(leftFrontPower, rightBackPower, rightFrontPower, leftBackPower);
         // Sends the desired inputs over to the Board class.

@@ -3,10 +3,13 @@ package org.firstinspires.ftc.teamcode.Legacy.teleops;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.teamcode.Legacy.subsystems.ManualDrive;
 import org.firstinspires.ftc.teamcode.Legacy.utilities.RobotCore;
 import org.firstinspires.ftc.teamcode.statemachines.SlidesSM;
 import org.firstinspires.ftc.teamcode.utilities.Structures;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
+import org.firstinspires.ftc.teamcode.Legacy.subsystems.CrashProtect;
 
 import java.util.List;
 
@@ -57,7 +60,12 @@ public class RobBot extends OpMode {
         }
 
 //      This function sends the game pad inputs to the Traction class.
-        robotCore.manualDrive.controllerDrive(axial * slowDown, lateral * slowDown, yaw * slowDown);
+        if(robotCore.crashProtect.distanceSensor.getDistance(DistanceUnit.CM) > 5) {
+        robotCore.manualDrive.controllerDrive(axial * slowDown, lateral * slowDown, yaw * slowDown);}
+
+        else {
+            robotCore.manualDrive.controllerDrive(0, 0, 0);
+        }
 
 
 //      This toggle block moves the claw servo.
@@ -100,6 +108,8 @@ public class RobBot extends OpMode {
 //            board.runTo(.7); }
 
         telemetry.addData("State: ", robotCore.slides.slidesSM.getState());
+        telemetry.addData("Distance:  ", robotCore.crashProtect.distanceSensor.getDistance(DistanceUnit.CM));
+
     }
 
 
